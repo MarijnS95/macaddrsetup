@@ -113,10 +113,12 @@ int main(int argc, char **argv)
         ret = fprintf(fpb, "%02x:%02x:%02x:%02x:%02x:%02x\n",
                       buf[5], buf[4], buf[3], buf[2], buf[1], buf[0]);
 #endif
+
+        fclose(fpb);
+
         if (ret != 18) {
                 SLOGE("failed to write BT mac address\n");
                 ta_close();
-                fclose(fpb);
                 exit(1);
         }
 
@@ -190,7 +192,6 @@ int main(int argc, char **argv)
 #endif
         }
         ta_close();
-        fclose(fpb);
         if (fpw)
                 fclose(fpw);
         dlclose(ta_handle);
